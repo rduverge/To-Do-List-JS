@@ -1,10 +1,14 @@
 const readline = require('readline');
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+  });
 
 //Tarea 
 let taskList = [];
 
-function addTask(tasklist, taskDescription){
-    tasklist.push({done: false, description: taskDescription});
+function addTask(taskList, taskDesc){
+    taskList.push({done: false, description: taskDesc});
 }
 
 function printTaskList (taskList){
@@ -19,12 +23,25 @@ function printTaskList (taskList){
     } 
 }
 
-addTask(taskList, 'Sacar la basura');
-addTask(taskList, 'Lavar los platos');
-
-printTaskList(taskList);
-
 // Primer modo: lectura de tareas necesarias
-
+function askForTasks(taskList) {
+    rl.question('Introduce una nueva tarea (fin si terminas) ', function (taskDesc){
+        switch (taskDesc){
+            case 'fin': 
+                console.log('No se intruducen ya más tareas');
+                rl.close();
+                break; 
+            case 'exit': 
+                rl.close();
+                break; 
+            default:
+                addTask(taskList, taskDesc); 
+                console.log('La lista de tareas actual es: ');
+                printTaskList(taskList);
+                askForTasks(taskList)             
+            }
+    });
+}
+askForTasks(taskList);
 
 // Segundo modo: Marcar las tareas realizadas 
