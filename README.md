@@ -10,7 +10,7 @@ JavaScript and ES6 syntax
 ### Setup
 
 ```cmd
-git clone git@github.com:Bantealem/my-to-do-list.git
+git clone https://github.com/rduverge/To-Do-List-JS
 npm install
 npm run build
 npm start
